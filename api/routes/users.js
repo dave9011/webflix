@@ -42,6 +42,11 @@ router.put('/:id', async (req, res) => {
         req.body.password = encryptAES(req.body.password);
     }
 
+    // only allow admins to update the admin field
+    if (! req.user.isAdmin) {
+        delete req.body.isAdmin;
+    }
+
     try {
         const updatedUser = await User.findByIdAndUpdate(
             req.params.id,
