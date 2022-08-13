@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const authRoute = require("./routes/auth");
 
 const APP_PORT = 8082;
 
@@ -10,14 +11,15 @@ dotenv.config();
 
 // connect to our database
 mongoose
-    .connect(process.env.MONGO_DB_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
+    .connect(process.env.MONGO_DB_URL)
     .then(
         () => { console.log('Successfully connected to the database'); },
         (err) => { console.log('An error ocurred when connecting to the database.', err); }
     );
+
+app.use(express.json());
+
+app.use("/api/auth", authRoute);
 
 // start the web server
 app.listen(APP_PORT, () => {
