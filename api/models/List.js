@@ -1,4 +1,4 @@
-const { Schema, default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 const ListSchema = new Schema(
     {
