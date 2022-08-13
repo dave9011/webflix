@@ -2,7 +2,9 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const authRoute = require("./routes/auth");
+const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/users");
+const verify = require("./middleware/verify-token");
 
 const APP_PORT = 8082;
 
@@ -19,7 +21,8 @@ mongoose
 
 app.use(express.json());
 
-app.use("/api/auth", authRoute);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", verify, userRoutes);
 
 // start the web server
 app.listen(APP_PORT, () => {
