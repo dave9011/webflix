@@ -18,6 +18,11 @@ const Home = ({ type }) => {
             });
 
             setLists(response.data);
+
+            return () => {
+                setLists([]);
+                setGenre(null);
+            };
         } catch (err) {
             console.log(err);
         }
