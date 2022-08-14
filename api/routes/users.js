@@ -20,7 +20,6 @@ router.get('/find/:id', async (req, res) => {
 
         res.status(200).json(scrubUserCredentials(user));
     } catch (err) {
-        console.log(err);
         res.status(500).json(err);
     }
 });
