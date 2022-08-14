@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 function verify(req, res, next) {
-    const authTokenHeader = req.headers.token;
+    const authTokenHeader = req.headers.authorization;
 
     if (! authTokenHeader || ! authTokenHeader.startsWith("Bearer ")) {
         res.status(401).json('You are not authenticated.');
