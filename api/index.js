@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
 const movieRoutes = require("./routes/movies");
+const listRoutes = require("./routes/list");
 const verify = require("./middleware/verify-token");
 
 const APP_PORT = 8082;
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", verify, userRoutes);
 app.use("/api/movies", verify, movieRoutes);
+app.use("/api/lists", verify, listRoutes);
 
 // start the web server
 app.listen(APP_PORT, () => {

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ListSchema = new Schema(
+const ListSchema = new mongoose.Schema(
     {
         title: {
             type: String,
@@ -8,7 +8,7 @@ const ListSchema = new Schema(
             unique: true,
         },
         type: {
-            type: Number,
+            type: String,
         },
         genre: {
             type: String,
