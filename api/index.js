@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
+const movieRoutes = require("./routes/movies");
 const verify = require("./middleware/verify-token");
 
 const APP_PORT = 8082;
@@ -23,6 +24,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", verify, userRoutes);
+app.use("/api/movies", verify, movieRoutes);
 
 // start the web server
 app.listen(APP_PORT, () => {
