@@ -5,6 +5,7 @@ import './watch.scss'
 const Watch = () => {
     const location = useLocation();
     const item = location.state.item;
+    const source = item.video.startsWith('/assets') ? item.video : 'assets/video/demon_slayer_season_2_episode_18.mp4';
 
     return (
         <div className="watch">
@@ -15,9 +16,7 @@ const Watch = () => {
                 </div>
             </Link>
 
-            <video src="assets/video/demon_slayer_season_2_episode_18.mp4" className="video" autoPlay progress="true" controls></video>
-
-            {/* <video src={item.video} className="video" autoPlay progress="true" controls></video> */}
+            <video src={source} className="video" autoPlay progress="true" controls></video>
         </div>
     );
 }
