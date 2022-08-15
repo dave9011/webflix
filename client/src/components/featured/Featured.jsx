@@ -1,7 +1,38 @@
 import { PlayArrow, InfoOutlined } from '@material-ui/icons';
+import { useEffect, useState } from 'react';
+import { getRandom } from '../../services/api/movie';
+import { useNavigate } from "react-router-dom";
 import './featured.scss';
 
 const Featured = ({type}) => {
+    const [content, setContent] = useState({});
+
+    useEffect(async () => {
+        try {
+            const response = await getRandom(type);
+
+            setContent(response.data[0]);
+        } catch (err) {
+            console.log(err);
+        }
+
+        return () => {
+            setContent({});
+        };
+    }, [type]);
+
+    const navigateToWatch = useNavigate()
+    
+    async function handleClick(event) {
+        event.preventDefault();
+
+        navigateToWatch('/watch', {
+            state: {
+                item: content,
+            }
+        });
+    }
+    
     return (
         <div className='featured'>
             {type && (
@@ -19,22 +50,21 @@ const Featured = ({type}) => {
                 </div>
             )}
             
-            <img src="https://cdn.wallpapersafari.com/45/87/ql2YgM.jpg"
-                // src="https://cdn.wallpapersafari.com/29/25/NJru6y.jpg"
+            <img src={content.img}
                 alt=""
             />
 
             <div className="info">
-                <img src="https://www.ranklogos.com/wp-content/uploads/2015/01/One-Piece-Logo.png"
+                <img src={content.imgTitle}
                     alt=""
                 />
 
                 <span className="desc">
-                    Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead survivor dictum mauris.
+                    {content.desc}
                 </span>
 
                 <div className="buttons">
-                    <button className="play">
+                    <button className="play" onClick={handleClick}>
                         <PlayArrow/>
                         <span>Play</span>
                     </button>

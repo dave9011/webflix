@@ -1,17 +1,24 @@
-import {ArrowBackOutlined } from '@material-ui/icons';
+import { ArrowBackOutlined } from '@material-ui/icons';
+import { Link, useLocation } from "react-router-dom";
 import './watch.scss'
 
 const Watch = () => {
+    const location = useLocation();
+    const item = location.state.item;
+    const source = item.video.startsWith('https://de') ? item.video : 'assets/video/demon_slayer_season_2_episode_18.mp4';
+
     return (
         <div className="watch">
-            <div className="back">
-                <ArrowBackOutlined/>
-                Home
-            </div>
+            <Link to="/" className="link">
+                <div className="back">
+                    <ArrowBackOutlined />
+                    Home
+                </div>
+            </Link>
 
-            <video src="assets/video/demon_slayer_season_2_episode_18.mp4" className="video" autoplay progress controls></video>
+            <video src={source} className="video" autoPlay progress="true" controls></video>
         </div>
     );
 }
- 
+
 export default Watch;
