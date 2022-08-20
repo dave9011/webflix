@@ -2,6 +2,7 @@ import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import "./app.scss";
 import Home from "./pages/home/Home";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -11,7 +12,9 @@ function App() {
       <div className="container">
         <Sidebar />
 
-        <Home />
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
       </div>
     </div>
   );
