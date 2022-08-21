@@ -3,6 +3,7 @@ import Topbar from "./components/topbar/Topbar";
 import "./app.scss";
 import Home from "./pages/home/Home";
 import { Routes, Route } from "react-router-dom";
+import UserList from "./pages/userList/UserList";
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+
+          <Route path="/users" element={<UserList />} />
         </Routes>
       </div>
     </div>
